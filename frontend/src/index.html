@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Sistema de Inventarios</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sistema completo de gestión de inventarios">
+  <meta name="keywords" content="inventario, gestión, productos, stock">
+  <meta name="author" content="Tu Empresa">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+  
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <!-- Preload critical resources -->
+  <!-- <link rel="preload" href="assets/images/logo.svg" as="image"> -->
+  
+  <!-- Meta tags for social sharing -->
+  <meta property="og:title" content="Sistema de Inventarios">
+  <meta property="og:description" content="Sistema completo de gestión de inventarios con Angular y Express">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tu-dominio.com">
+  
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#3f51b5">
+  <meta name="msapplication-navbutton-color" content="#3f51b5">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#3f51b5">
+  
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.webmanifest">
+  
+  <!-- Apple touch icon -->
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.svg">
+  
+  <!-- Structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Sistema de Inventarios",
+      "description": "Sistema completo de gestión de inventarios",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
+</head>
+<body class="mat-typography">
+  <!-- Loading spinner -->
+  <div id="initial-loader" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease-out;
+  ">
+    <div style="text-align: center; color: white;">
+      <div style="
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      "></div>
+      <h2 style="margin: 0; font-weight: 300; font-size: 24px;">Sistema de Inventarios</h2>
+      <p style="margin: 10px 0 0; opacity: 0.8; font-size: 16px;">Cargando...</p>
+    </div>
+  </div>
+  
+  <!-- Angular app root -->
+  <app-root>
+    <!-- Fallback content while Angular loads -->
+    <div style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f5f5f5;
+      font-family: 'Roboto', sans-serif;
+    ">
+      <div style="text-align: center; padding: 20px;">
+        <div style="
+          width: 80px;
+          height: 80px;
+          background: #3f51b5;
+          border-radius: 50%;
+          margin: 0 auto 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+          <span style="color: white; font-size: 40px;">📦</span>
+        </div>
+        <h1 style="color: #333; margin: 0 0 10px;">Sistema de Inventarios</h1>
+        <p style="color: #666; margin: 0;">Cargando aplicación...</p>
+      </div>
+    </div>
+  </app-root>
+  
+  <!-- Loading animation styles -->
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Hide loader when Angular is ready */
+    .ng-loaded #initial-loader {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    /* Smooth transitions */
+    * {
+      transition: all 0.2s ease-in-out;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+    
+    /* Focus styles for accessibility */
+    *:focus {
+      outline: 2px solid #3f51b5;
+      outline-offset: 2px;
+    }
+    
+    /* Print styles */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+  
+  <!-- Service Worker registration - DISABLED TEMPORARILY -->
+  <script>
+    // Service Worker deshabilitado temporalmente para evitar errores 404
+    /*
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+    */
+    
+    // Hide loader when page is fully loaded
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('initial-loader');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 300);
+      }
+    });
+  </script>
+</body>
+</html>
